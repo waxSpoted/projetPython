@@ -15,7 +15,8 @@ def extractMot(pdf,motRech):
     pdfText = ""
     for page in range(pdfReader.numPages):
         pageObj = pdfReader.getPage(page)
-        pdfText += pageObj.extractText().replace('\n','')
+        pdfText += pageObj.extractText()
+    print(pdfText)
     textSplit=list(pdfText.split())
     for mot in textSplit :
         if mot == motRech : 
@@ -25,10 +26,16 @@ def extractMot(pdf,motRech):
     print("Mot introuvable")
     print("fin")
 
+
+def findFile(serialNumber):
+    repository="/home/wax/Bureau/pdfTest/"
+    pdfRepo="%s%s.pdf" % (repository,serialNumber)
+    return pdfRepo
+
+
 ########
 # Main #
 ########
 
-repTest='/home/wax/Bureau/testpdf.pdf'
-
-extractMot(repTest,'Ligne4')
+repo=findFile("testpdf")
+extractMot(repo,'Ligne4')
