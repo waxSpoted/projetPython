@@ -1,21 +1,22 @@
 import PyPDF2
 
+import os
+ 
+from fnmatch import filter
+ 
+
 ############
 # Function #
 ############
 
-def extractText(pdf):
+def extractMot(pdf,motRech):
     pdfFileObj = open(pdf, 'rb')
     pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
     pdfText = ""
     for page in range(pdfReader.numPages):
         pageObj = pdfReader.getPage(page)
         pdfText += pageObj.extractText().replace('\n','')
-    print(pdfText)
-    return pdfText
-
-def recupText(text,motRech):
-    textSplit=list(text.split())
+    textSplit=list(pdfText.split())
     for mot in textSplit :
         if mot == motRech : 
             print("Mot trouvé")
@@ -28,5 +29,6 @@ def recupText(text,motRech):
 # Main #
 ########
 
-textExtrait=extractText('testpdf.pdf')
-recupText(textExtrait,"Ligne4")
+repTest='/home/wax/Bureau/testpdf.pdf'
+
+extractMot(repTest,'Ligne4')
