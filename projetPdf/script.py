@@ -1,10 +1,5 @@
 import PyPDF2
 
-import os
- 
-from fnmatch import filter
- 
-
 ############
 # Function #
 ############
@@ -37,5 +32,8 @@ def findFile(serialNumber):
 # Main #
 ########
 
-repo=findFile("testpdf")
-extractMot(repo,'Ligne4')
+print("Entrer le nom du pdf que vous voulez examiner : ") #testpdf
+chemin=input()
+print("Entrer le mot à rechercher : ") #Ligne4
+rechercheMot=input()
+extractMot(findFile(chemin),rechercheMot)
