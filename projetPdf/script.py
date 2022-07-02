@@ -32,8 +32,18 @@ def findFile(serialNumber):
 # Main #
 ########
 
-print("Entrer le nom du pdf que vous voulez examiner : ") #testpdf
-chemin=input()
-print("Entrer le mot à rechercher : ") #Ligne4
-rechercheMot=input()
-extractMot(findFile(chemin),rechercheMot)
+if __name__ == '__main__': 
+    print("Entrer le nom du pdf que vous voulez examiner : ") #testpdf
+    chemin=input()
+    if len(chemin)>0: 
+        print("Entrer le mot à rechercher : ") #Ligne4
+        rechercheMot=input()
+        if len(rechercheMot)>0:
+            extractMot(findFile(chemin),rechercheMot)
+        else: 
+            print("Aucun mot fourni, veuillez rééssayer ! ")
+            exit
+    else: 
+        print("Le nom du pdf est invalide veuillez rééssayer ! ")
+        exit
+     
