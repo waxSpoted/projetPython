@@ -1,5 +1,9 @@
 import PyPDF2
 
+#################################################
+# Fonctionne avec la mise en page de 123456.pdf #
+#################################################
+
 ############
 # Function #
 ############
@@ -12,22 +16,28 @@ def extractMot(pdf,motRech):
         pageObj = pdfReader.getPage(page)
         pdfText += pageObj.extractText()
     textSplit=list(pdfText.split('\n'))
-    print("text split : ", textSplit)
-    for phrase in textSplit :
-        if phrase.startswith(motRech) : 
-            print("Phrase trouvée")
-            print("Phrase:",phrase)    
-            return phrase
-        else : 
-            print("La phrase est : ",phrase)
-    print("Mot introuvable")
-    print("fin")
+#    print("text split : ", textSplit)
+#    print("première val de text split : ", textSplit[1])
+#    print("longueur de split : ", len(textSplit))
 
+    for i in range(len(textSplit)): 
+#        print("valeur de textsplit ", i ,textSplit[i])
+        if str(textSplit[i]).strip() == str(motRech).strip() :
+            print("%s : %s" % (motRech,textSplit[i+1]))
+            return textSplit[i+1]
+    print("Mot introuvable")
+    return False
 
 def findFile(serialNumber):
     repository="/home/wax/Bureau/pdfTest/"
     pdfRepo="%s%s.pdf" % (repository,serialNumber)
     return pdfRepo
+
+def findVal (phraseExtraite): 
+    listPhrase=list(phraseExtraite)
+    for mot in listPhrase : 
+        if mot == "test":
+            return True
 
 
 ########
