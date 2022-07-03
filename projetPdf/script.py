@@ -11,13 +11,15 @@ def extractMot(pdf,motRech):
     for page in range(pdfReader.numPages):
         pageObj = pdfReader.getPage(page)
         pdfText += pageObj.extractText()
-    print(pdfText)
-    textSplit=list(pdfText.split())
-    for mot in textSplit :
-        if mot == motRech : 
-            print("Mot trouvé")
-            print("Mot: ",mot)    
-            return mot
+    textSplit=list(pdfText.split('\n'))
+    print("text split : ", textSplit)
+    for phrase in textSplit :
+        if phrase.startswith(motRech) : 
+            print("Phrase trouvée")
+            print("Phrase:",phrase)    
+            return phrase
+        else : 
+            print("La phrase est : ",phrase)
     print("Mot introuvable")
     print("fin")
 
