@@ -29,7 +29,7 @@ def extractMot(pdf,motRech):
     return False
 
 def findFile(serialNumber):
-    repository="/home/wax/Bureau/Informatique/pdfTest/"
+    repository="/home/wax/Bureau/informatique/pdfTest/"
     pdfRepo="%s%s.pdf" % (repository,serialNumber)
     return pdfRepo
 
