@@ -91,7 +91,7 @@ def execColonne():
 ########
 # Main #
 ########
-
+  
 if __name__ == '__main__': 
     print("Entrer le type de pdf : colonne / ligne ")
     type=input()
