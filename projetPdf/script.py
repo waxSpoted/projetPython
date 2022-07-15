@@ -44,57 +44,26 @@ def findFile(serialNumber):
     pdfRepo="%s%s.pdf" % (repository,serialNumber)
     return pdfRepo
 
-########
-# Main #
-########
-
-if __name__ == '__main__': 
-    print("Entrer le type de pdf : colonne / ligne ")
-    type=input()
-    if type == "colonne" :
-        print('') 
-        print("Entrer le nom du pdf que vous voulez examiner : ") #testpdf
-        chemin=input()
-        if len(chemin)>0: 
-            print('')
-            print("Entrer le nombre de colonne : ")
-            nbCol=input()
-            if len(nbCol)>0:
-                print('')
-                print("Entrer le mot à rechercher")
-                motRech=input()
-                if len(motRech)>0 : 
-                    print('')
-                    extractMotColonne(findFile(chemin), nbCol, motRech)
-                else : 
-                    print("le mot recherché est invalide ! ")
-                    exit
-            else : 
-                print("le nombre de colonne est invalide ! ")
-                exit
-        else : 
-            print("le nom du pdf est invalide veuillez rééssayer ! ")
-    if type == "ligne" : 
+def execLigne():
+    print('')
+    print("Entrer le nom du pdf que vous voulez examiner : ") #testpdf
+    chemin=input()
+    if len(chemin)>0: 
         print('')
-        print("Entrer le nom du pdf que vous voulez examiner : ") #testpdf
-        chemin=input()
-        if len(chemin)>0: 
+        print("Entrer le mot à rechercher : ") #Ligne4
+        rechercheMot=input()
+        if len(rechercheMot)>0:
             print('')
-            print("Entrer le mot à rechercher : ") #Ligne4
-            rechercheMot=input()
-            if len(rechercheMot)>0:
-                print('')
-                extractMotLigne(findFile(chemin),rechercheMot)
-            else: 
-                print("Aucun mot fourni, veuillez rééssayer ! ")
-                exit
+            extractMotLigne(findFile(chemin),rechercheMot)
         else: 
-            print("Le nom du pdf est invalide veuillez rééssayer ! ")
+            print("Aucun mot fourni, veuillez rééssayer ! ")
             exit
+    else: 
+        print("Le nom du pdf est invalide veuillez rééssayer ! ")
+        exit
 
-
-# Cas pdf du type 654321.pdf
-    """
+def execColonne(): 
+    print('') 
     print("Entrer le nom du pdf que vous voulez examiner : ") #testpdf
     chemin=input()
     if len(chemin)>0: 
@@ -116,20 +85,17 @@ if __name__ == '__main__':
             exit
     else : 
         print("le nom du pdf est invalide veuillez rééssayer ! ")
-    """
-# Cas pdf du type 123456.pdf
-    """
-    print("Entrer le nom du pdf que vous voulez examiner : ") #testpdf
-    chemin=input()
-    if len(chemin)>0: 
-        print("Entrer le mot à rechercher : ") #Ligne4
-        rechercheMot=input()
-        if len(rechercheMot)>0:
-            extractMotLigne(findFile(chemin),rechercheMot)
-        else: 
-            print("Aucun mot fourni, veuillez rééssayer ! ")
-            exit
-    else: 
-        print("Le nom du pdf est invalide veuillez rééssayer ! ")
-        exit
-    """    
+
+
+
+########
+# Main #
+########
+
+if __name__ == '__main__': 
+    print("Entrer le type de pdf : colonne / ligne ")
+    type=input()
+    if type == "colonne" :
+        execColonne()
+    else : 
+        execLigne()
