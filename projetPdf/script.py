@@ -1,9 +1,5 @@
 import PyPDF2
 
-#################################################
-# Fonctionne avec la mise en page de 123456.pdf #
-#################################################
-
 ############
 # Function #
 ############
@@ -16,19 +12,15 @@ def extractMotLigne(pdf,motRech):
         pageObj = pdfReader.getPage(page)
         pdfText += pageObj.extractText()
     textSplit=list(pdfText.split('\n'))
-#    print("text split : ", textSplit)
-#    print("première val de text split : ", textSplit[1])
-#    print("longueur de split : ", len(textSplit))
-
     for i in range(len(textSplit)): 
 #        print("valeur de textsplit ", i ,textSplit[i])
         if str(textSplit[i]).strip() == str(motRech).strip() :
-            print("%s : %s" % (motRech,textSplit[i+1]))
+            print('mot trouvé !')
+            print("valeur associée : ",textSplit[i+1])
+            print('done')
             return textSplit[i+1]
     print("Mot introuvable")
     return False
-
-#################################
 
 def extractMotColonne(pdf,nbCol,motRech):
     pdfFileObj = open(pdf, 'rb')
@@ -40,35 +32,69 @@ def extractMotColonne(pdf,nbCol,motRech):
     textSplit = list(pdfText.split('\n'))
     for j in range(len(textSplit)):
         if str(textSplit[j]).strip() == str(motRech).strip() : 
-            print("mot trouvé : ",textSplit[j])
-            print("mot voulu : ",textSplit[j+int(nbCol)+1])
+            print("mot trouvé !")
+            print("valeur associée : ",textSplit[j+int(nbCol)+1])
             print("done")
-            return True
+            return textSplit[j+int(nbCol)+1]
     print("mot introuvable")
-    return False
-
-##################################"    
+    return False   
 
 def findFile(serialNumber):
     repository="/home/wax/Bureau/informatique/pdfTest/"
     pdfRepo="%s%s.pdf" % (repository,serialNumber)
     return pdfRepo
 
-def findVal(phraseExtraite): 
-    listPhrase=list(phraseExtraite)
-    for mot in listPhrase : 
-        if mot == "test":
-            return True
-
-
 ########
 # Main #
 ########
 
 if __name__ == '__main__': 
+    print("Entrer le type de pdf : colonne / ligne ")
+    type=input()
+    if type == "colonne" :
+        print('') 
+        print("Entrer le nom du pdf que vous voulez examiner : ") #testpdf
+        chemin=input()
+        if len(chemin)>0: 
+            print('')
+            print("Entrer le nombre de colonne : ")
+            nbCol=input()
+            if len(nbCol)>0:
+                print('')
+                print("Entrer le mot à rechercher")
+                motRech=input()
+                if len(motRech)>0 : 
+                    print('')
+                    extractMotColonne(findFile(chemin), nbCol, motRech)
+                else : 
+                    print("le mot recherché est invalide ! ")
+                    exit
+            else : 
+                print("le nombre de colonne est invalide ! ")
+                exit
+        else : 
+            print("le nom du pdf est invalide veuillez rééssayer ! ")
+    if type == "ligne" : 
+        print('')
+        print("Entrer le nom du pdf que vous voulez examiner : ") #testpdf
+        chemin=input()
+        if len(chemin)>0: 
+            print('')
+            print("Entrer le mot à rechercher : ") #Ligne4
+            rechercheMot=input()
+            if len(rechercheMot)>0:
+                print('')
+                extractMotLigne(findFile(chemin),rechercheMot)
+            else: 
+                print("Aucun mot fourni, veuillez rééssayer ! ")
+                exit
+        else: 
+            print("Le nom du pdf est invalide veuillez rééssayer ! ")
+            exit
+
 
 # Cas pdf du type 654321.pdf
-  
+    """
     print("Entrer le nom du pdf que vous voulez examiner : ") #testpdf
     chemin=input()
     if len(chemin)>0: 
@@ -90,7 +116,7 @@ if __name__ == '__main__':
             exit
     else : 
         print("le nom du pdf est invalide veuillez rééssayer ! ")
-    
+    """
 # Cas pdf du type 123456.pdf
     """
     print("Entrer le nom du pdf que vous voulez examiner : ") #testpdf
