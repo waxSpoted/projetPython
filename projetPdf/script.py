@@ -1,8 +1,18 @@
 import PyPDF2
 
+#########################################
+# Le type colonne est le pdf 654321.pdf #
+# Le type ligne est le pdf 123456.pdf   #
+#########################################
+
 ############
 # Function #
 ############
+
+def findFile(serialNumber):
+    repository="/home/wax/Bureau/informatique/pdfTest/"
+    pdfRepo="%s%s.pdf" % (repository,serialNumber)
+    return pdfRepo
 
 def extractMotLigne(pdf,motRech):
     pdfFileObj = open(pdf, 'rb')
@@ -16,7 +26,7 @@ def extractMotLigne(pdf,motRech):
 #        print("valeur de textsplit ", i ,textSplit[i])
         if str(textSplit[i]).strip() == str(motRech).strip() :
             print('mot trouvé !')
-            print("valeur associée : ",textSplit[i+1])
+#            print("valeur associée : ",textSplit[i+1])
             print('done')
             return textSplit[i+1]
     print("Mot introuvable")
@@ -33,16 +43,11 @@ def extractMotColonne(pdf,nbCol,motRech):
     for j in range(len(textSplit)):
         if str(textSplit[j]).strip() == str(motRech).strip() : 
             print("mot trouvé !")
-            print("valeur associée : ",textSplit[j+int(nbCol)+1])
+#            print("valeur associée : ",textSplit[j+int(nbCol)+1])
             print("done")
             return textSplit[j+int(nbCol)+1]
     print("mot introuvable")
     return False   
-
-def findFile(serialNumber):
-    repository="/home/wax/Bureau/informatique/pdfTest/"
-    pdfRepo="%s%s.pdf" % (repository,serialNumber)
-    return pdfRepo
 
 def execLigne():
     print('')
@@ -54,7 +59,7 @@ def execLigne():
         rechercheMot=input()
         if len(rechercheMot)>0:
             print('')
-            extractMotLigne(findFile(chemin),rechercheMot)
+            return extractMotLigne(findFile(chemin),rechercheMot)
         else: 
             print("Aucun mot fourni, veuillez rééssayer ! ")
             exit
@@ -76,7 +81,7 @@ def execColonne():
             motRech=input()
             if len(motRech)>0 : 
                 print('')
-                extractMotColonne(findFile(chemin), nbCol, motRech)
+                return extractMotColonne(findFile(chemin), nbCol, motRech)
             else : 
                 print("le mot recherché est invalide ! ")
                 exit
@@ -86,8 +91,6 @@ def execColonne():
     else : 
         print("le nom du pdf est invalide veuillez rééssayer ! ")
 
-
-
 ########
 # Main #
 ########
@@ -96,6 +99,8 @@ if __name__ == '__main__':
     print("Entrer le type de pdf : colonne / ligne ")
     type=input()
     if type == "colonne" :
-        execColonne()
+        res = execColonne()
+        print("le resultat est : ", res)
     else : 
-        execLigne()
+        res = execLigne()
+        print("le resultat est : ", res )
