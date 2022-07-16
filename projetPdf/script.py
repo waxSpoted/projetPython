@@ -1,4 +1,5 @@
 import PyPDF2
+import os
 
 #########################################
 # Le type colonne est le pdf 654321.pdf #
@@ -10,8 +11,8 @@ import PyPDF2
 ############
 
 def findFile(serialNumber):
-    repository="/home/wax/Bureau/informatique/pdfTest/"
-    pdfRepo="%s%s.pdf" % (repository,serialNumber)
+    dossier = os.getcwd()
+    pdfRepo="%s/ressources/%s.pdf" % (dossier, serialNumber)
     return pdfRepo
 
 def extractMotLigne(pdf,motRech):
